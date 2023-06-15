@@ -7,7 +7,6 @@ class Node {
   }
 }
 
-
 /** Graph class. */
 
 class Graph {
@@ -16,32 +15,37 @@ class Graph {
   }
 
   /** add Node instance and add it to nodes property on graph. */
-  addVertex(vertex) { }
+  addVertex(vertex) {
+    //create a new node instance
+
+    //add it to this.nodes
+    this.nodes.add(vertex);
+  }
 
   /** add array of new Node instances and adds to them to nodes property. */
-  addVertices(vertexArray) { }
+  addVertices(vertexArray) {}
 
   /** add edge between vertices v1,v2 */
-  addEdge(v1, v2) { }
+  addEdge(v1, v2) {}
 
   /** remove edge between vertices v1,v2 */
-  removeEdge(v1, v2) { }
+  removeEdge(v1, v2) {}
 
   /** remove vertex from graph:
    *
    * - remove it from nodes property of graph
    * - update any adjacency lists using that vertex
    */
-  removeVertex(vertex) { }
+  removeVertex(vertex) {}
 
   /** traverse graph with DFS and returns array of Node values */
-  depthFirstSearch(start) { }
+  depthFirstSearch(start) {}
 
   /** traverse graph with BDS and returns array of Node values */
-  breadthFirstSearch(start) { }
+  breadthFirstSearch(start) {}
 
   /** find the distance of the shortest path from the start vertex to the end vertex */
-  distanceOfShortestPath(start, end) { }
+  distanceOfShortestPath(start, end) {}
 }
 
-module.exports = { Graph, Node }
+module.exports = { Graph, Node };

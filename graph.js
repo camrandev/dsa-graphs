@@ -58,7 +58,40 @@ class Graph {
   }
 
   /** traverse graph with DFS and returns array of Node values */
-  depthFirstSearch(start) {}
+  depthFirstSearch(start) {
+    // set a starting place
+    // seen=new set() s u p x
+    // make a stack as set with start included 
+    //stack = , p, x, q
+ 
+// while stack
+// delete(start) from stack
+// add start to seen
+// add start.adjacent to stack
+    // if seen has adjacent val don't add
+// start = stack[set.length-1]
+// 
+// end loop, return seen
+      
+let curr = start;
+let seen = new Set();
+let stack = new Set([start]);
+console.log("stack====", stack)
+
+while (stack.length) {
+  stack.delete(curr);
+  seen.add(curr);
+
+  // add neighbors to stack
+  curr.adjacent.forEach(v => {
+    if (!seen.has(v)) stack.add(v)
+  })
+
+  curr = stack[stack.length-1]
+}
+console.log("seen ====", seen)
+return seen
+  }
 
   /** traverse graph with BDS and returns array of Node values */
   breadthFirstSearch(start) {}

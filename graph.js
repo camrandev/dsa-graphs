@@ -76,33 +76,55 @@ class Graph {
     let curr = start;
     let seen = new Set();
     let stack = [start];
-    console.log("stack====", stack);
-
-    debugger;
 
     while (stack.length > 0) {
       stack.pop(curr);
       seen.add(curr.value);
-      debugger;
       // add neighbors to stack
       if (curr.adjacent.size > 0) {
         curr.adjacent.forEach((v) => {
           if (!seen.has(v.value) && !stack.includes(v)) stack.push(v);
         });
       }
-
-      curr = stack[0];
-      debugger;
+      curr = stack[stack.length-1];
     }
-    console.log("seen ====", [...seen]);
     return [...seen];
   }
 
   /** traverse graph with BDS and returns array of Node values */
-  breadthFirstSearch(start) {}
+  breadthFirstSearch(start) {
+    let curr = start;
+    let seen = new Set();
+    let stack = [start];
+
+    while (stack.length > 0) {
+      stack.shift(curr);
+      seen.add(curr.value);
+      // add neighbors to stack
+      if (curr.adjacent.size > 0) {
+        curr.adjacent.forEach((v) => {
+          if (!seen.has(v.value) && !stack.includes(v)) stack.push(v);
+        });
+      }
+      curr = stack[0];
+    }
+    return [...seen];
+  }
 
   /** find the distance of the shortest path from the start vertex to the end vertex */
-  distanceOfShortestPath(start, end) {}
+  distanceOfShortestPath(start, end, calls=[]) {
+// how do we know when we're done searching?
+    // compare steps to this.nodes.size
+    
+// if  (this.left === null || this.right === null) return 1 
+
+// return Math.min(
+//   this.left.minDepthToIncompleteNode(), 
+//   this.right.minDepthToIncompleteNode() 
+// ) + 1
+
+
+  }
 }
 
 let graph = new Graph();

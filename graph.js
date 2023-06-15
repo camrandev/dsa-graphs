@@ -61,36 +61,41 @@ class Graph {
   depthFirstSearch(start) {
     // set a starting place
     // seen=new set() s u p x
-    // make a stack as set with start included 
+    // make a stack as set with start included
     //stack = , p, x, q
- 
-// while stack
-// delete(start) from stack
-// add start to seen
-// add start.adjacent to stack
+
+    // while stack
+    // delete(start) from stack
+    // add start to seen
+    // add start.adjacent to stack
     // if seen has adjacent val don't add
-// start = stack[set.length-1]
-// 
-// end loop, return seen
-      
-let curr = start;
-let seen = new Set();
-let stack = new Set([start]);
-console.log("stack====", stack)
+    // start = stack[set.length-1]
+    //
+    // end loop, return seen
 
-while (stack.length) {
-  stack.delete(curr);
-  seen.add(curr);
+    let curr = start;
+    let seen = new Set();
+    let stack = [start];
+    console.log("stack====", stack);
 
-  // add neighbors to stack
-  curr.adjacent.forEach(v => {
-    if (!seen.has(v)) stack.add(v)
-  })
+    debugger;
 
-  curr = stack[stack.length-1]
-}
-console.log("seen ====", seen)
-return seen
+    while (stack.length > 0) {
+      stack.pop(curr);
+      seen.add(curr.value);
+      debugger;
+      // add neighbors to stack
+      if (curr.adjacent.size > 0) {
+        curr.adjacent.forEach((v) => {
+          if (!seen.has(v.value) && !stack.includes(v)) stack.push(v);
+        });
+      }
+
+      curr = stack[0];
+      debugger;
+    }
+    console.log("seen ====", [...seen]);
+    return [...seen];
   }
 
   /** traverse graph with BDS and returns array of Node values */
@@ -99,5 +104,43 @@ return seen
   /** find the distance of the shortest path from the start vertex to the end vertex */
   distanceOfShortestPath(start, end) {}
 }
+
+let graph = new Graph();
+let S = new Node("S");
+let P = new Node("P");
+let U = new Node("U");
+let X = new Node("X");
+let Q = new Node("Q");
+let Y = new Node("Y");
+let V = new Node("V");
+let R = new Node("R");
+let W = new Node("W");
+let T = new Node("T");
+
+graph.addVertices([S, P, U, X, Q, Y, V, R, W, T]);
+
+graph.addEdge(S, P);
+graph.addEdge(S, U);
+
+graph.addEdge(P, X);
+graph.addEdge(U, X);
+
+graph.addEdge(P, Q);
+graph.addEdge(U, V);
+
+graph.addEdge(X, Q);
+graph.addEdge(X, Y);
+graph.addEdge(X, V);
+
+graph.addEdge(Q, R);
+graph.addEdge(Y, R);
+
+graph.addEdge(Y, W);
+graph.addEdge(V, W);
+
+graph.addEdge(R, T);
+graph.addEdge(W, T);
+
+let result = graph.depthFirstSearch(T); //S, P, U, X, Q, Y, V, R, W, T in some order
 
 module.exports = { Graph, Node };

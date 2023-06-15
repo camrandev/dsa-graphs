@@ -112,15 +112,25 @@ class Graph {
   }
 
   /** find the distance of the shortest path from the start vertex to the end vertex */
-  distanceOfShortestPath(start, end, calls=[]) {
+  distanceOfShortestPath(start, end, calls={}, seen = new Set([start])) {
 // how do we know when we're done searching?
     // compare steps to this.nodes.size
-    
-// if  (this.left === null || this.right === null) return 1 
+
+
+if (start === end) return 0 //set seen to everything except first value
+
+
+for (let node of start.adjacent) {
+  if (!seen.has(node)) {
+    seen.add(node)
+
+  }
+}
+
 
 // return Math.min(
-//   this.left.minDepthToIncompleteNode(), 
-//   this.right.minDepthToIncompleteNode() 
+//   this.left.minDepthToIncompleteNode(),
+//   this.right.minDepthToIncompleteNode()
 // ) + 1
 
 

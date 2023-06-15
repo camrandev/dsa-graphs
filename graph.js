@@ -28,12 +28,13 @@ class Graph {
 
       this.nodes.add(vertex);
     }
-    
+
   }
 
   /** add edge between vertices v1,v2 */
   addEdge(v1, v2) {
     v1.adjacent.add(v2)
+    v2.adjacent.add(v1)
   }
 
   /** remove edge between vertices v1,v2 */

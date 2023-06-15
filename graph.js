@@ -23,10 +23,18 @@ class Graph {
   }
 
   /** add array of new Node instances and adds to them to nodes property. */
-  addVertices(vertexArray) {}
+  addVertices(vertexArray) {
+    for (let vertex of vertexArray){
+
+      this.nodes.add(vertex);
+    }
+    
+  }
 
   /** add edge between vertices v1,v2 */
-  addEdge(v1, v2) {}
+  addEdge(v1, v2) {
+    v1.adjacent.add(v2)
+  }
 
   /** remove edge between vertices v1,v2 */
   removeEdge(v1, v2) {}

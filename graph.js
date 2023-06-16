@@ -61,7 +61,7 @@ class Graph {
   depthFirstSearch(start) {
     // set a starting place
     // seen=new set() s u p x
-    // make a stack as set with start included
+    // make a stack with start included
     //stack = , p, x, q
 
     // while stack
@@ -112,67 +112,92 @@ class Graph {
   }
 
   /** find the distance of the shortest path from the start vertex to the end vertex */
-  distanceOfShortestPath(start, end, calls={}, seen = new Set([start])) {
-// how do we know when we're done searching?
-    // compare steps to this.nodes.size
+  distanceOfShortestPath(start, end,  seen = new Set([start])) {
+    
+
+// if (start === end) { 
+//   for (let val of seen){
+//    if (seen.size() === 1) return;
+//     seen.delete(val)
+//   }
+//   return 1} //set seen to everything except first value
+
+// for (let node of start.adjacent) { // 
+//   debugger
+//   if (!seen.has(node)) {
+
+//     seen.add(node)
+    
+//     return Math.min(
+
+//       this.distanceOfShortestPath(node, end, calls, seen)
+//       // node.adjacent.forEach(v => this.distanceOfShortestPath(v, end, calls, seen))+1)
+//     ) + 1
+//   }
+// }
+//   }
+
+// // return Math.min(
+// //   this.left.minDepthToIncompleteNode(),
+// //   this.right.minDepthToIncompleteNode()
+// // ) + 1
 
 
-if (start === end) return 0 //set seen to everything except first value
+//   }
 
 
-for (let node of start.adjacent) {
-  if (!seen.has(node)) {
-    seen.add(node)
+////////////////////////////////
 
+
+let calls = []
+
+function _distanceOfShortestPath(start, end){
+let count = 1
+
+    let toVisitStack = [start];
+    let seen = new Set(toVisitStack);
+  
+    while (toVisitStack.length > 0) {
+      let currPerson = toVisitStack.pop();
+      if (currPerson === end) return count;
+      count += 1
+  
+      for (let neighbor of currPerson.adjacent) {
+        if (!seen.has(neighbor)) {
+          toVisitStack.push(neighbor);
+          seen.add(neighbor);
+        }
+      }
+    }
   }
+
+for (let node of start.adjacent){
+  calls.push(_distanceOfShortestPath(node, end))
 }
 
+console.log("cals calls calls", calls)
+if (calls.includes(undefined)){
+  return undefined
+}else{
+return Math.min(...calls)
+  }}
 
-// return Math.min(
-//   this.left.minDepthToIncompleteNode(),
-//   this.right.minDepthToIncompleteNode()
-// ) + 1
-
-
-  }
 }
 
 let graph = new Graph();
-let S = new Node("S");
-let P = new Node("P");
-let U = new Node("U");
-let X = new Node("X");
-let Q = new Node("Q");
-let Y = new Node("Y");
-let V = new Node("V");
-let R = new Node("R");
-let W = new Node("W");
-let T = new Node("T");
 
-graph.addVertices([S, P, U, X, Q, Y, V, R, W, T]);
+    let r = new Node("R");
+    let i = new Node("I");
+    let t = new Node("T");
+    let h = new Node("H");
+    let m = new Node("M");
 
-graph.addEdge(S, P);
-graph.addEdge(S, U);
-
-graph.addEdge(P, X);
-graph.addEdge(U, X);
-
-graph.addEdge(P, Q);
-graph.addEdge(U, V);
-
-graph.addEdge(X, Q);
-graph.addEdge(X, Y);
-graph.addEdge(X, V);
-
-graph.addEdge(Q, R);
-graph.addEdge(Y, R);
-
-graph.addEdge(Y, W);
-graph.addEdge(V, W);
-
-graph.addEdge(R, T);
-graph.addEdge(W, T);
-
-let result = graph.depthFirstSearch(T); //S, P, U, X, Q, Y, V, R, W, T in some order
-
+    graph.addVertices([r, i, t, h, m])
+    graph.addEdge(r, i);
+    graph.addEdge(r, t);
+    graph.addEdge(r, h);
+    graph.addEdge(i, t);
+    graph.addEdge(t, h);
+    graph.addEdge(h, m);
+    graph.distanceOfShortestPath(r, m)
 module.exports = { Graph, Node };
